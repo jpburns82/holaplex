@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Card, Image, Row, Col } from 'antd';
+import { Avatar, Card, Image, Row, Col, Typography } from 'antd';
 import { Storefront } from '@/modules/storefront/types';
+const { Paragraph } = Typography;
 
 const PreviewCard = styled(Card)`
   .ant-card-meta-detail {
@@ -54,6 +55,10 @@ type StorePreviewProps = {
 
 export default function StorePreview({ storefront, metadata }: StorePreviewProps) {
   const domain = `${storefront.subdomain}.holaplex.com`;
+  console.log({
+    storefront,
+    metadata,
+  });
 
   return (
     <PreviewCard>
@@ -66,9 +71,12 @@ export default function StorePreview({ storefront, metadata }: StorePreviewProps
         }
         title={storefront.meta.title}
         description={
-          <a href={`https://${domain}`} rel="nofollow noreferrer" target="_blank">
-            {domain}
-          </a>
+          // <a href={`https://${domain}`} rel="nofollow noreferrer" target="_blank">
+          //   {domain}
+          // </a>
+          <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>
+            {storefront.meta.description}
+          </Paragraph>
         }
       />
       <Row justify="space-between">
